@@ -1,0 +1,244 @@
+{
+  "generatedBy": "scripts/generate-duet-guides.mjs",
+  "sampleRate": 22050,
+  "exercises": [
+    {
+      "id": "echo",
+      "title": "回声练习",
+      "bpm": 72,
+      "key": "C 大调",
+      "duration": 16,
+      "cover": "/media/tide.jpg",
+      "leadIn": 2.4,
+      "roles": {
+        "a": {
+          "label": "低声部",
+          "range": "C4–A4"
+        },
+        "b": {
+          "label": "高声部",
+          "range": "A4–D5"
+        }
+      },
+      "tracks": {
+        "a": "/media/duet/echo-a.wav",
+        "b": "/media/duet/echo-b.wav"
+      },
+      "lines": [
+        {
+          "id": "echo-1",
+          "role": "a",
+          "text": "风把回声留给你",
+          "start": 2.4,
+          "end": 6.4
+        },
+        {
+          "id": "echo-2",
+          "role": "b",
+          "text": "我在下一句等你",
+          "start": 5.8,
+          "end": 9.8
+        },
+        {
+          "id": "echo-3",
+          "role": "a",
+          "text": "尾音还没有落地",
+          "start": 9.6,
+          "end": 13.4
+        },
+        {
+          "id": "echo-4",
+          "role": "b",
+          "text": "你先别急着换气",
+          "start": 11.4,
+          "end": 15.4
+        }
+      ],
+      "parts": {
+        "a": [
+          {
+            "start": 2.4,
+            "end": 3.2,
+            "midi": 64
+          },
+          {
+            "start": 3.4,
+            "end": 4.1,
+            "midi": 67
+          },
+          {
+            "start": 4.3,
+            "end": 6.2,
+            "midi": 69
+          },
+          {
+            "start": 9.6,
+            "end": 10.4,
+            "midi": 67
+          },
+          {
+            "start": 10.6,
+            "end": 11.4,
+            "midi": 69
+          },
+          {
+            "start": 11.6,
+            "end": 12.8,
+            "midi": 69
+          }
+        ],
+        "b": [
+          {
+            "start": 5.8,
+            "end": 6.6,
+            "midi": 72
+          },
+          {
+            "start": 6.8,
+            "end": 7.5,
+            "midi": 74
+          },
+          {
+            "start": 7.7,
+            "end": 9.9,
+            "midi": 71
+          },
+          {
+            "start": 11.4,
+            "end": 12.2,
+            "midi": 69
+          },
+          {
+            "start": 12.4,
+            "end": 13.1,
+            "midi": 67
+          },
+          {
+            "start": 13.3,
+            "end": 14.6,
+            "midi": 64
+          }
+        ]
+      }
+    },
+    {
+      "id": "braid",
+      "title": "交叠练习",
+      "bpm": 60,
+      "key": "D 小调",
+      "duration": 16,
+      "cover": "/media/dawn.jpg",
+      "leadIn": 2.4,
+      "roles": {
+        "a": {
+          "label": "低声部",
+          "range": "B3–G4"
+        },
+        "b": {
+          "label": "高声部",
+          "range": "A4–C5"
+        }
+      },
+      "tracks": {
+        "a": "/media/duet/braid-a.wav",
+        "b": "/media/duet/braid-b.wav"
+      },
+      "lines": [
+        {
+          "id": "braid-1",
+          "role": "a",
+          "text": "先把第一声递出",
+          "start": 2,
+          "end": 6
+        },
+        {
+          "id": "braid-2",
+          "role": "b",
+          "text": "尾音还没落你就进",
+          "start": 4.8,
+          "end": 9
+        },
+        {
+          "id": "braid-3",
+          "role": "a",
+          "text": "交错着把话说完",
+          "start": 8.6,
+          "end": 12.6
+        },
+        {
+          "id": "braid-4",
+          "role": "b",
+          "text": "留半拍给我收尾",
+          "start": 11.2,
+          "end": 15.2
+        }
+      ],
+      "parts": {
+        "a": [
+          {
+            "start": 2,
+            "end": 3,
+            "midi": 62
+          },
+          {
+            "start": 3.2,
+            "end": 4,
+            "midi": 64
+          },
+          {
+            "start": 4.2,
+            "end": 5.6,
+            "midi": 67
+          },
+          {
+            "start": 8.6,
+            "end": 9.4,
+            "midi": 65
+          },
+          {
+            "start": 9.6,
+            "end": 10.4,
+            "midi": 62
+          },
+          {
+            "start": 10.6,
+            "end": 11.9,
+            "midi": 60
+          }
+        ],
+        "b": [
+          {
+            "start": 4.8,
+            "end": 5.6,
+            "midi": 72
+          },
+          {
+            "start": 5.8,
+            "end": 6.6,
+            "midi": 69
+          },
+          {
+            "start": 6.8,
+            "end": 8.9,
+            "midi": 67
+          },
+          {
+            "start": 11.2,
+            "end": 12,
+            "midi": 60
+          },
+          {
+            "start": 12.2,
+            "end": 13,
+            "midi": 64
+          },
+          {
+            "start": 13.2,
+            "end": 14.5,
+            "midi": 67
+          }
+        ]
+      }
+    }
+  ]
+}

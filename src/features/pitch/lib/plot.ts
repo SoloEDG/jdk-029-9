@@ -2,13 +2,15 @@ import type { GuideNote, PitchPoint, TimeRange } from '../../../shared/document'
 import { clockLabel } from '../../../shared/time'
 import { noteName } from './detect'
 
-interface Trace { points: PitchPoint[]; color: string }
+export interface Trace { points: PitchPoint[]; color: string; width?: number }
 
-interface Plot {
+export interface Plot {
   position: number
   range: TimeRange
   notes: GuideNote[]
   traces: Trace[]
+  /** Optional per-time band shading, used by the duet evidence view. */
+  bands?: { start: number; end: number; color: string }[]
 }
 
 export function drawPitch(canvas: HTMLCanvasElement, width: number, height: number, plot: Plot) {
@@ -63,6 +65,13 @@ export function drawPitch(canvas: HTMLCanvasElement, width: number, height: numb
   context.beginPath()
   context.rect(left, top, right - left, bottom - top)
   context.clip()
+  for (const band of plot.bands ?? []) {
+    const bandStart = Math.max(first, band.start)
+    const bandEnd = Math.min(plot.range.end, band.end)
+    if (bandEnd <= bandStart) continue
+    context.fillStyle = band.color
+    context.fillRect(x(bandStart), top, x(bandEnd) - x(bandStart), bottom - top)
+  }
   for (const note of notes) {
     const start = x(note.start)
     const length = Math.max(4, x(note.end) - start)
@@ -73,7 +82,7 @@ export function drawPitch(canvas: HTMLCanvasElement, width: number, height: numb
   }
   for (const trace of plot.traces) {
     context.strokeStyle = trace.color
-    context.lineWidth = 2
+    context.lineWidth = trace.width ?? 2
     context.beginPath()
     let last: PitchPoint | undefined
     for (const point of trace.points) {

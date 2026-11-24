@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { AudioLines } from '@lucide/vue'
-import { songs, SongCatalog, SongHeading, TransportBar } from '../features/playback'
-import { LyricStage, PhraseList } from '../features/lyrics'
-import { RecordControls } from '../features/capture'
-import { PitchPanel } from '../features/pitch'
-import { ReviewPanel } from '../features/review'
-import { useWorkspace } from './useWorkspace'
+import { AudioLines, MicVocal, Music4 } from '@lucide/vue'
+import { ref } from 'vue'
+import SoloWorkspace from './SoloWorkspace.vue'
+import { DuetWorkbench } from '../features/duet'
 
-const {
-  transport, lyrics, pitch, review, capture, graphRange, graphPosition,
-  selectLine, adjacent, selectSong, seek, toggleLoop, togglePlay, toggleRecording, listen,
-} = useWorkspace()
+type Mode = 'duet' | 'solo'
+const mode = ref<Mode>('duet')
 </script>
 
 <template>
@@ -18,32 +13,16 @@ const {
     <div class="app-header-inner">
       <span class="brand-mark"><AudioLines :size="22" :stroke-width="2.1" /></span>
       <div class="brand-name"><strong>夜航练习室</strong><span>NIGHT SESSION</span></div>
+      <nav class="mode-switch" aria-label="练习模式">
+        <button :class="{ chosen: mode === 'duet' }" :aria-pressed="mode === 'duet'" @click="mode = 'duet'">
+          <MicVocal :size="16" /> 双声部接唱
+        </button>
+        <button :class="{ chosen: mode === 'solo' }" :aria-pressed="mode === 'solo'" @click="mode = 'solo'">
+          <Music4 :size="16" /> 单声部跟唱
+        </button>
+      </nav>
     </div>
   </header>
-  <main class="workspace">
-    <aside class="left-rail">
-      <SongCatalog :songs="songs" :current="transport.song.value" @select="selectSong" />
-      <PhraseList :lines="transport.song.value.lines" :selected="lyrics.selected.value" :active="lyrics.active.value" @select="selectLine" />
-    </aside>
-    <div class="workbench">
-      <SongHeading :song="transport.song.value" />
-      <LyricStage :selected="lyrics.selected.value" :active="lyrics.active.value" :upcoming="lyrics.upcoming.value"
-        :playing="transport.isPlaying.value" :progress="lyrics.lineProgress.value" />
-      <PitchPanel :notes="transport.song.value.notes" :position="graphPosition" :range="graphRange"
-        :latest="capture.status.value === 'recording' ? pitch.latest.value : null"
-        :live="capture.status.value === 'recording' ? pitch.points.value : []"
-        :take-a="review.slots.value[0]?.pitch ?? []" :take-b="review.slots.value[1]?.pitch ?? []" />
-      <TransportBar :song="transport.song.value" :position="transport.position.value" :playing="transport.isPlaying.value"
-        :loop="transport.loop.value" :volume="transport.volume.value" :issue="transport.issue.value"
-        @toggle="togglePlay" @previous="adjacent(-1)" @next="adjacent(1)" @loop="toggleLoop"
-        @seek="seek" @volume="transport.setVolume" />
-      <RecordControls :status="capture.status.value" :issue="capture.issue.value" :level="capture.level.value"
-        :selected="lyrics.selected.value" @toggle="toggleRecording" />
-    </div>
-    <aside class="right-rail">
-      <ReviewPanel :takes="review.visible.value" :slots="review.slots.value" :active-id="review.playingId.value"
-        :selected="lyrics.selected.value" :notes="transport.song.value.notes" :issue="review.issue.value"
-        @listen="listen" @choose="review.choose" />
-    </aside>
-  </main>
+  <DuetWorkbench v-if="mode === 'duet'" />
+  <SoloWorkspace v-else />
 </template>

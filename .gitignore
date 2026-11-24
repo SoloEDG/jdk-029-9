@@ -9,3 +9,5 @@ node_modules/
 .env.*
 !.env.example
 !.env.sample
+.ssr-build/
+.test-build/
